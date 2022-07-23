@@ -14,4 +14,4 @@ Disclaimer
 
 This repository is for reference to courses mentioned above. 
 
-The materials provied here must be used for reference purpose only. 
+The materials provided here must be used for reference purpose only.
