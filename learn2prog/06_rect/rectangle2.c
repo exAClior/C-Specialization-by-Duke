@@ -35,7 +35,40 @@ rectangle canonicalize(rectangle r) {
   return r;
 }
 
-rectangle intersection(rectangle r1, rectangle r2) { return r1; }
+int min(int a, int b) { return (a > b) ? b : a; }
+int max(int a, int b) { return (a < b) ? b : a; }
+
+rectangle intersection(rectangle r1, rectangle r2) {
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);
+
+  rectangle res;
+  res.x = max(r1.x, r2.x);
+  res.y = max(r1.y, r2.y);
+
+  res.width = min(r1.x + r1.width, r2.x + r2.width);
+  res.height = min(r1.y + r1.height, r2.y + r2.height);
+
+  if (res.width < res.x) {
+    res.width = 0;
+    res.height = 0;
+    return res;
+
+  } else {
+    res.width -= res.x;
+  }
+
+  if (res.height < res.y) {
+    res.height = 0;
+    res.width = 0;
+    return res;
+
+  } else {
+    res.height -= res.y;
+  }
+
+  return res;
+}
 
 int main(void) {
   rectangle r1;
