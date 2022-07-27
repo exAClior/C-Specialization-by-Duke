@@ -25,12 +25,12 @@ void printRectangle(rectangle r) {
 rectangle canonicalize(rectangle r) {
   if (r.width < 0) {
     r.x += r.width;
-    r.width *= 1;
+    r.width *= -1;
   }
 
   if (r.height < 0) {
     r.y += r.height;
-    r.height *= 1;
+    r.height *= -1;
   }
   return r;
 }
