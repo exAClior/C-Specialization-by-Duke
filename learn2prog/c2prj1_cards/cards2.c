@@ -1,9 +1,10 @@
 #include "cards2.h"
 #include "assert.h"
 #include "stdio.h"
+#include "string.h"
 
 void assert_card_valid(card_t c) {
-  assert(c.value >= 2 && c.value <= 14);
+  assert(c.value >= 2 && c.value <= VALUE_ACE);
   assert(c.suit >= SPADES && c.suit <= CLUBS);
 }
 
@@ -52,9 +53,27 @@ char suit_letter(card_t c) {
   return suit_array[c.suit];
 }
 
-void print_card(card_t c) { printf("%c%c", suit_letter(c), value_letter(c)); }
+void print_card(card_t c) { printf("%c%c", value_letter(c), suit_letter(c)); }
 
 card_t card_from_letters(char value_let, char suit_let) {
+  // check vaidlity of input
+  const char letter_array[13] = "234567890JQKA";
+  const char suit_array[4] = "shdc";
+  char *value_ptr = strchr(letter_array, value_let);
+  char *suit_ptr = strchr(suit_array, suit_let);
+  assert(value_ptr != NULL);
+  assert(suit_ptr != NULL);
+
   card_t c;
+  c.value = (unsigned)((value_ptr - letter_array) + 2);
+  c.suit = (int)(suit_ptr - suit_array);
   return c;
+}
+
+card_t card_from_num(unsigned c) {
+
+  const char letter_array[13] = "234567890JQKA";
+  const char suit_array[4] = "shdc";
+
+  return card_from_letters(letter_array[c % 13], suit_array[(int)(c / 13)]);
 }
