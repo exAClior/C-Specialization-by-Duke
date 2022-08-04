@@ -1,2 +1,4 @@
+CC=gcc
+CFLAGS=-pedantic -std=gnu99 -Wall -Werror
 test:test.c
-	-gcc -o test -pedantic -std=gnu99 -Wall -Werror test.c
+	$(CC) -o test $(CFLAGS)  test.c
